@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/5.3.3/framer-motion.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --primary-color: #3b82f6;
+            --secondary-color: #1e40af;
+            --text-color: #333;
+            --bg-color: #f4f4f9;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 6rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 0.5rem auto;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Circular Skill Bars */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .skill {
+            position: relative;
+            width: 150px;
+            height: 150px;
+        }
+
+        .skill-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: conic-gradient(var(--primary-color) var(--progress), #ddd var(--progress));
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .skill-inner {
+            width: 80%;
+            height: 80%;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .skill-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .skill-name {
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-info,
+        .contact-form-container {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+
+        .contact-icon i {
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .form-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .skills-container {
+                justify-content: space-around;
+            }
+            .skill {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-100">
+    <header class="navbar flex justify-between items-center p-5 shadow-md fixed w-full z-10">
+        <div class="text-xl font-bold text-white" style="color: black;">Harshawardhan Jadhav</div>
+        <nav>
+            <ul class="flex space-x-4">
+                <li><a href="#" class="hover:text-blue-500">Home</a></li>
+                <li><a href="#about" class="hover:text-blue-500">About</a></li>
+                <li><a href="#projects" class="hover:text-blue-500">Projects</a></li>
+                <li><a href="#contact" class="hover:text-blue-500">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="space-x-2">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" class="inline h-6"></a>
+            <a href="#"><img src="https://images.rawpixel.com/image_png_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjk4Mi1kNS0xMF8xLnBuZw.png" alt="LinkedIn" class="inline h-6"></a>
+            <a href="#"><img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-twitter-social-media-round-icon-png-image_6315985.png" alt="Twitter" class="inline h-6"></a>
+            <a href="#"><img src="https://c0.klipartz.com/pngpicture/866/916/gratis-png-logo-iconos-de-computadora-instagram-logo-de-la-aplicacion-de-instagram-thumbnail.png" alt="Instagram" class="inline h-6"></a>
+        </div>
+    </header>
+    <main class="container mx-auto mt-10 px-5" style="padding-top: 7%;">
+        <section class="flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 flex justify-center md:justify-start mb-10 md:mb-0">
+                <img src="IMG_20240707_125955.png" alt="Profile Picture" class="profile-picture rounded-full w-64 h-64 border-4 border-white shadow-lg transform hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="md:w-1/2 text-center md:text-left">
+                <h1 class="text-4xl font-bold mb-5">Turning Vision Into Reality With Code And Design.</h1>
+                <p class="mb-5">As a skilled full-stack developer, I am dedicated to turning ideas into innovative web applications. Explore my latest projects , showcasing my expertise in React.js and web development.</p>
+                <div class="flex justify-center md:justify-start space-x-4">
+                    <a href="Harshawardhan Jadhav (5).pdf" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-300">Resume</a>
+                    <a href="#contact" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors duration-300">Contact</a>
+                </div>
+            </div>
+        </section>
+        
+        
+       
+        <section id="projects" class="mt-20" style="padding-top: 7%;">
+            <h2 class="text-3xl font-bold text-center section-title mb-8">PROJECTS</h2>
+            <div class="flex flex-wrap justify-center space-y-4">
+                <!-- Project 1 -->
+                <div class="w-full md:w-1/2 lg:w-1/3 p-4">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <img src="https://img.freepik.com/premium-vector/search-data-internet-save-folder_18660-389.jpg?w=740" alt="Project Image" class="w-full h-32 object-cover rounded-t-lg mb-4">
+                        <h3 class="text-xl font-bold mb-2">Category And Product Management System</h3>
+                        <p class="text-gray-600">ASP.NET MVC application for managing categories and products with CRUD operations.</p>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="w-full md:w-1/2 lg:w-1/3 p-4">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <img src="https://img.freepik.com/free-vector/contact-us-concept-landing-page_52683-18636.jpg?t=st=1720338053~exp=1720341653~hmac=73eab9fab4ef9cfa807209de55080bf06f0704305e95cc683364e6134456af25&w=996" alt="Project Image" class="w-full h-32 object-cover rounded-t-lg mb-4">
+                        <h3 class="text-xl font-bold mb-2">Employee Management System</h3>
+                        <p class="text-gray-600">ASP.NET MVC application for managing employees with CRUD operations.</p>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="w-full md:w-1/2 lg:w-1/3 p-4">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <img src="https://img.freepik.com/premium-photo/desk-with-many-different-objects_81048-33132.jpg?w=900" alt="Project Image" class="w-full h-32 object-cover rounded-t-lg mb-4">
+                        <h3 class="text-xl font-bold mb-2">Stationary Management System</h3>
+                        <p class="text-gray-600">ASP.NET Core MVC application for managing stationary with complex parts like purchase order and vendor payment.</p>
+                    </div>
+                </div>
+                <!-- Project 4 -->
+                <div class="w-full md:w-1/2 lg:w-1/3 p-4">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <img src="https://img.freepik.com/free-vector/online-shopping-concept-landing-page_52683-22153.jpg?t=st=1720337344~exp=1720340944~hmac=6fffef02ffd9fa9d51f857f80e2c5f2c4ec3c849318c6d7ac531911c82d7e35f&w=996" alt="Project Image" class="w-full h-32 object-cover rounded-t-lg mb-4">
+                        <h3 class="text-xl font-bold mb-2">E-commerce Website</h3>
+                        <p class="text-gray-600">ASP.NET MVC application with product catalog management and payment gateway integration.</p>
+                    </div>
+                </div>
+                <!-- Project 5 -->
+                <div class="w-full md:w-1/2 lg:w-1/3 p-4">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <img src="https://img.freepik.com/free-photo/woman-texting-couch_53876-96946.jpg?t=st=1720338266~exp=1720341866~hmac=48635bc1683f7d8791fd2ae3ffa12a3a6bd5be362ddb0ba617a91a14b1716ad7&w=1060" alt="Project Image" class="w-full h-32 object-cover rounded-t-lg mb-4">
+                        <h3 class="text-xl font-bold mb-2">Real-Time Chatbox Application</h3>
+                        <p class="text-gray-600">ASP.NET MVC Core and SignalR application for real-time messaging with notification system.</p>
+                    </div>
+                </div>
+                <!-- Project 6 -->
+                <div class="w-full md:w-1/2 lg:w-1/3 p-4">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <img src="https://img.freepik.com/free-vector/marketing-students-create-corporate-identity_335657-3061.jpg?t=st=1720338322~exp=1720341922~hmac=cafa4104777dbbee639d36c20ed6ef49d16e1be9f2285954bdc143ba3e993e6b&w=996" alt="Project Image" class="w-full h-32 object-cover rounded-t-lg mb-4">
+                        <h3 class="text-xl font-bold mb-2">Learning Management System</h3>
+                        <p class="text-gray-600">MVC Core application for managing educational courses, tracking student progress, and facilitating online learning.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="about" class="section">
+            <h2 class="section-title">About Me</h2>
+            <div class="card">
+                <h3 class="text-2xl font-bold mb-4">HARSHAWARDHAN JADHAV</h3>
+                <p class="text-gray-600 mb-6">SOFTWARE DEVELOPER</p>
+                <h4 class="text-xl font-bold mb-3">TECHNICAL SKILLS</h4>
+                <div class="skills-container">
+                    <div class="skill">
+                        <div class="skill-circle" style="--progress: 80%;">
+                            <div class="skill-inner">
+                                <span class="skill-value">80%</span>
+                                <span class="skill-name">Programming Languages</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-circle" style="--progress: 80%;">
+                            <div class="skill-inner">
+                                <span class="skill-value">80%</span>
+                                <span class="skill-name">Frontend</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-circle" style="--progress: 75%;">
+                            <div class="skill-inner">
+                                <span class="skill-value">75%</span>
+                                <span class="skill-name">Database</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-circle" style="--progress: 85%;">
+                            <div class="skill-inner">
+                                <span class="skill-value">85%</span>
+                                <span class="skill-name">.NET Framework</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-circle" style="--progress: 85%;">
+                            <div class="skill-inner">
+                                <span class="skill-value">85%</span>
+                                <span class="skill-name">IDE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="contact-section">
+                <div class="contact-info card">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>9307768087</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>harshawardhanjadhav222@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Address</h4>
+                            <p>Narhe, Pune 411041</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-container card">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-input" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-input" placeholder="Your Phone Number" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-textarea" rows="5" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="form-button">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const { motion } = window.framerMotion;
+
+            const profilePictureAnimation = {
+                hidden: { opacity: 0, scale: 0.8 },
+                visible: { opacity: 1, scale: 1 }
+            };
+
+            const contentAnimation = {
+                hidden: { opacity: 0, x: -100 },
+                visible: { opacity: 1, x: 0 }
+            };
+
+            const profilePicture = document.querySelector('.profile-picture');
+            const content = document.querySelector('.content');
+
+            motion(profilePicture).start(profilePictureAnimation);
+            motion(content).start(contentAnimation);
+        });
+    </script>
+     <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Animation for skill circles
+            const skills = document.querySelectorAll('.skill-circle');
+            skills.forEach(skill => {
+                const progress = skill.style.getPropertyValue('--progress');
+                skill.style.setProperty('--progress', '0%');
+                setTimeout(() => {
+                    skill.style.setProperty('--progress', progress);
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
